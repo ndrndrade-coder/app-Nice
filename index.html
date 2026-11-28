@@ -3,78 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0b1020">
-<title>ADEl V2 — Smart Digital Workspace</title>
-<style>
-:root{--bg:#0b1020;--panel:#121a2e;--panel2:#18233c;--line:#263653;--text:#eef3ff;--muted:#9eacc7;--blue:#6d9cff;--blue2:#376fe0;--green:#5dd6a2;--danger:#ff7b88}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% -10%,#1d3158 0,transparent 35%),var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;min-height:100vh}
-button,input,textarea,select{font:inherit}button{cursor:pointer}
-.top{min-height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px max(20px,calc((100vw - 1180px)/2));background:#0b1020e8;position:sticky;top:0;z-index:5;backdrop-filter:blur(14px)}
-.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:21px;letter-spacing:.3px}.logo{width:40px;height:40px;border-radius:13px;background:linear-gradient(135deg,#80aaff,#376fe0);display:grid;place-items:center;color:white;font-size:25px;box-shadow:0 8px 25px #376fe055}
-.topright{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.lang,.ghost{border:1px solid var(--line);color:var(--text);background:var(--panel);border-radius:10px;padding:9px 12px}
-.wrap{max-width:1180px;margin:auto;padding:30px 22px 70px}.hero{padding:24px 0 25px}.eyebrow{color:var(--green);font-size:13px;font-weight:700;letter-spacing:1px}.hero h1{font-size:clamp(30px,5vw,48px);margin:12px 0 10px;line-height:1.15}.hero p{color:var(--muted);max-width:700px;line-height:1.8;margin:0}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:24px}.tool{background:linear-gradient(145deg,var(--panel),#10182b);border:1px solid var(--line);border-radius:17px;padding:19px;text-align:start;color:var(--text);min-height:140px;transition:.18s}.tool:hover{transform:translateY(-3px);border-color:#608ee6;box-shadow:0 14px 35px #0003}.ico{font-size:25px}.tool h3{margin:12px 0 5px;font-size:17px}.tool p{color:var(--muted);font-size:13px;line-height:1.6;margin:0}
-.workspace,.account{display:none;margin-top:20px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px}.workspace.active,.account.active{display:block}.workhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}.workhead h2{margin:0}.back{background:transparent;color:var(--blue);border:0}
-label{display:block;color:var(--muted);font-size:13px;margin:13px 0 7px}textarea,input[type=text],input[type=email],input[type=password],input[type=url],input[type=number],select{width:100%;background:#0b1325;border:1px solid var(--line);border-radius:11px;padding:12px;color:var(--text);outline:none}textarea{min-height:130px;resize:vertical;line-height:1.7}textarea:focus,input:focus,select:focus{border-color:var(--blue)}
-.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}.primary,.secondary{border:0;border-radius:10px;padding:10px 15px;font-weight:650}.primary{background:linear-gradient(135deg,#6d9cff,#376fe0);color:white}.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}.danger{background:#512632;color:#ffdce1;border:1px solid #82404e}.status{color:var(--green);font-size:13px;margin-top:10px;min-height:20px}.status.error{color:var(--danger)}.stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}.stat{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;color:var(--muted);font-size:13px}.stat b{color:var(--text);font-size:17px;display:block}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.drop{border:1px dashed #49618b;border-radius:14px;padding:20px;text-align:center;color:var(--muted)}#qrout{background:white;display:inline-block;padding:12px;border-radius:10px;margin-top:15px;min-height:10px}
-.account-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.account-head h2{margin:0}.account-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:15px}.auth-box{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px}.auth-box h3{margin:0 0 8px}.muted{color:var(--muted);font-size:13px;line-height:1.6}.hidden{display:none!important}
-footer{border-top:1px solid var(--line);padding:22px;text-align:center;color:var(--muted);font-size:12px}
-@media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.wrap{padding-top:24px}}
-@media(max-width:560px){.grid,.account-grid,.row{grid-template-columns:1fr}.top{padding:10px 14px;align-items:flex-start}.topright{justify-content:flex-end}.hero{padding-top:15px}.workspace,.account{padding:15px}}
-</style>
-</head>
-<body>
-<header class="top">
-  <div class="brand"><div class="logo">A</div><span>ADEl <small style="font-size:11px;color:var(--green)">V2</small></span></div>
-  <div class="topright">
-    <span id="userBadge" class="muted">زائر</span>
-    <button class="ghost" id="accountToggle">حسابي</button>
-    <select class="lang" id="language" aria-label="Language"><option value="ar">العربية</option><option value="fr">Français</option><option value="en">English</option></select>
-  </div>
-</header>
-<main class="wrap">
-  <section class="hero" id="hero">
-    <div class="eyebrow" id="eyebrow">مساحة عملك الرقمية</div>
-    <h1 id="headline">كل أدواتك. مكان واحد.</h1>
-    <p id="intro">أدوات بسيطة وسريعة تساعدك على إنجاز مهامك اليومية مباشرة من المتصفح. سجّل الدخول لحفظ ملاحظاتك في حسابك.</p>
-  </section>
-
-<section id="plans" style="margin:25px 0">
-  <div style="text-align:center;margin-bottom:20px">
-    <div class="eyebrow">ADEl PREMIUM</div>
-    <h2>اختر خطتك</h2>
-    <p class="muted">ابدأ مجاناً وانتقل إلى Pro للحصول على المزيد.</p>
-  </div>
-
-  <div class="grid">
-    <div class="tool">
-      <div class="ico">🌐</div>
-      <h3>ADEl Free</h3>
-      <h2>مجاني</h2>
-      <p>الأدوات الأساسية، الحساب الشخصي والإعلانات.</p>
-      <div class="actions">
-        <span class="status">متاح للجميع</span>
-      </div>
-    </div>
-
-    <div class="tool" style="border-color:#6d9cff">
-      <div class="ico">👑</div>
-      <h3>ADEl Pro</h3>
-      <h2 style="color:#80aaff">3$ / شهر</h2>
-      <p>ميزات متقدمة، أدوات حصرية وتجربة دون إعلانات.</p>
-      <div class="actions">
-        <span class="status">قريباً</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-  <section class="account" id="account">
-    <div class="account-head"><h2 id="accountTitle">حساب ADEl</h2><button class="back" id="closeAccount">العودة للأدوات</button></div>
-    <div id="signedOut">
-      <p class="muted" id="authIntro">أنشئ حساباً أو سجّل الدخول لحفظ بياناتك.</p>
-      <div class="account-grid">
+<meta name="theme-color" content="#0b1020">ass="account-grid">
         <div class="auth-box">
           <h3 id="signupTitle">إنشاء حساب</h3>
           <label id="nameLabel" for="signupName">الاسم</label><input id="signupName" type="text" autocomplete="name" placeholder="اسمك">
